@@ -71,6 +71,11 @@ export default class ForgotPasswordsController {
         if (user) {
           session.flashAll();
           await auth.use("web").login(user, true);
+          await user
+            .merge({
+              forgotPasswordToken: null,
+            })
+            .save();
           if (user.password === "supersuperadmin") {
             return response.redirect("/admin/");
           } else {
