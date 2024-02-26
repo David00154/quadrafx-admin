@@ -15,7 +15,7 @@ export default class EmailClient extends BaseMailer {
   constructor(
     private email: string,
     private subject: string,
-    private body: string,
+    private body: string
   ) {
     super();
   }
@@ -30,7 +30,7 @@ export default class EmailClient extends BaseMailer {
   public prepare(message: MessageContract) {
     message
       .subject(this.subject)
-      .from(env.get("SMTP_USERNAME"))
+      .from(`Admin <${env.get("SMTP_USERNAME")}>`)
       .to(this.email)
       .htmlView("emails/clientmail", {
         subject: this.subject,

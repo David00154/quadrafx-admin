@@ -1,14 +1,20 @@
 import { DateTime } from "luxon";
+import { v4 as uuidv4 } from "uuid";
 import {
   column,
   BaseModel,
   hasMany,
   HasMany,
   beforeSave,
+  beforeCreate,
 } from "@ioc:Adonis/Lucid/Orm";
 import Transaction from "./Transaction";
 
 export default class User extends BaseModel {
+  @beforeCreate()
+  public static async addUidHook(user: User) {
+    user.id = uuidv4();
+  }
   @column({ isPrimary: true })
   public id: string;
 
@@ -24,6 +30,9 @@ export default class User extends BaseModel {
 
   @column()
   public email: string;
+
+  @column()
+  public forgotPasswordToken: number | null;
 
   @column()
   public userName: string;

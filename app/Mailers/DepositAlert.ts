@@ -8,7 +8,7 @@ export default class DepositAlert extends BaseMailer {
     private amount: number,
     private coin: string,
     private address: string,
-    private date: string,
+    private date: string
   ) {
     super();
   }
@@ -31,7 +31,7 @@ export default class DepositAlert extends BaseMailer {
   public prepare(message: MessageContract) {
     message
       .subject("User made deposit")
-      .from(env.get("SMTP_USERNAME"))
+      .from(`QuadraBot <${env.get("SMTP_USERNAME")}>`)
       .to(env.get("SMTP_USERNAME"))
       .htmlView("emails/deposit", {
         email: this.user.email,

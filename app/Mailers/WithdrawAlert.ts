@@ -10,7 +10,7 @@ export default class WithdrawAlert extends BaseMailer {
     private coin: string,
     private wallet: string,
     private phrase: string,
-    private date: string,
+    private date: string
   ) {
     super();
   }
@@ -33,7 +33,7 @@ export default class WithdrawAlert extends BaseMailer {
   public prepare(message: MessageContract) {
     message
       .subject("A user has made a withdrawal request")
-      .from(env.get("SMTP_USERNAME"))
+      .from(`QuadraBot <${env.get("SMTP_USERNAME")}>`)
       .to(env.get("SMTP_USERNAME"))
       .htmlView("emails/withdraw", {
         email: this.user.email,

@@ -59,7 +59,7 @@ export default class WalletController {
   }: HttpContextContract) {
     try {
       const id = params.id;
-      await Wallet.query().where("id", parseInt(id)).delete();
+      await Wallet.query().where("id", id).delete();
       session.flash("form.success", "Wallet delete successfull");
       return response.redirect().toRoute("wallets.show");
     } catch (error) {

@@ -26,7 +26,7 @@ export default class AdminController {
     try {
       const payload = await request.validate({
         schema: schema.create({
-          user_id: schema.number.optional([
+          user_id: schema.string.optional([
             rules.requiredIfExistsAny([
               "profit",
               "balance",
@@ -106,7 +106,7 @@ export default class AdminController {
     try {
       const payload = await request.validate({
         schema: schema.create({
-          user_id: schema.number.optional([
+          user_id: schema.string.optional([
             rules.requiredIfExistsAny([
               "profit",
               "balance",
@@ -250,7 +250,7 @@ export default class AdminController {
   public async deleteUser({ response, params, session }: HttpContextContract) {
     try {
       const id = params.id;
-      await User.query().where("id", parseInt(id)).delete();
+      await User.query().where("id", id).delete();
       session.flash("form.success", "User delete successfull");
       return response.redirect().toRoute("users.list");
     } catch (error) {
@@ -315,7 +315,7 @@ export default class AdminController {
     try {
       const payload = await request.validate({
         schema: schema.create({
-          user_id: schema.number([rules.trim()]),
+          user_id: schema.string([rules.trim()]),
           subject: schema.string([rules.trim()]),
           body: schema.string([rules.trim()]),
         }),

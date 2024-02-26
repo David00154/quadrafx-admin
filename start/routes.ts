@@ -39,6 +39,18 @@ Route.group(() => {
 
   Route.post("/login", "AuthController.login").as("login");
   Route.post("/signup", "AuthController.signup").as("signup");
+  Route.get(
+    "/forgot-password",
+    "ForgotPasswordsController.forgotPasswordShow"
+  ).as("forgot-password.show");
+
+  Route.post("/forgot-password", "ForgotPasswordsController.forgotPassword").as(
+    "forgot-password"
+  );
+  Route.get(
+    "/forgot-password/reset-link/verify-with-code",
+    "ForgotPasswordsController.confirmLink"
+  ).as("confirm-password-reset-link");
 }).prefix("auth");
 
 // Admin Stuff
