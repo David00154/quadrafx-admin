@@ -189,7 +189,7 @@ export default class AdminController {
     try {
       const payload = await request.validate({
         schema: schema.create({
-          user_id: schema.number.optional([
+          user_id: schema.string.optional([
             rules.requiredIfExistsAny([
               "trade_duration",
               "profit_positivity",
